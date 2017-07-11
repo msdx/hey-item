@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HeyItem</string>
+    <string name="borrow">借还</string>
+    <string name="items">物品</string>
+    <string name="staff">人员</string>
+    <string name="records">记录</string>
+    <string name="name">姓名</string>
+    <string name="mobile">手机</string>
+    <string name="add_staff">添加人员</string>
+    <string name="add">添加</string>
+    <string name="save">保存</string>
+    <string name="error_input_name">请输入姓名</string>
+    <string name="msg_save_successful">保存成功</string>
+    <string name="msg_delete_successful">删除成功</string>
+    <string name="error_staff_exists">该人员已存在</string>
+</resources>

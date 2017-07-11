@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/borrow"
+          android:icon="@drawable/ic_menu_scan"
+          android:title="@string/borrow"/>
+    <item android:id="@+id/items"
+          android:icon="@drawable/ic_menu_viewlist"
+          android:title="@string/items"/>
+    <item android:id="@+id/records"
+          android:icon="@drawable/ic_menu_category"
+          android:title="@string/records"/>
+    <item android:id="@+id/staff"
+          android:icon="@drawable/ic_menu_account"
+          android:title="@string/staff"/>
+</menu>
