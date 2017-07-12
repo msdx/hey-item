@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -18,6 +21,7 @@ import com.githang.heyitem.HIApplication;
 import com.githang.heyitem.R;
 import com.githang.heyitem.staff.Staff;
 import com.githang.heyitem.staff.add.AddStaffActivity;
+import com.githang.heyitem.staff.detail.StaffDetailActivity;
 import com.githang.heyitem.support.SpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -65,7 +69,17 @@ public class StaffListFragment extends Fragment {
         });
 
         mAdapter = new StaffAdapter(new ArrayList<Staff>(), LayoutInflater.from(getContext()));
-        mAdapter.setOnDeleteListener(new StaffAdapter.OnDeleteListener() {
+        mAdapter.setItemMenuListener(new StaffAdapter.ItemMenuListener() {
+            @Override
+            public void onItemClick(int position, StaffViewHolder holder) {
+                showStaffDetail(position, holder);
+            }
+
+            @Override
+            public void onEdit(int position) {
+                // TODO: 17-7-12 Edit staff
+            }
+
             @Override
             public void onDelete(int position) {
                 deleteStaff(position);
@@ -95,6 +109,16 @@ public class StaffListFragment extends Fragment {
     private void reloadStaffList() {
         List<Staff> list = HIApplication.liteOrm().query(Staff.class);
         mAdapter.update(list);
+    }
+
+    private void showStaffDetail(int position, final StaffViewHolder holder) {
+        Staff staff = mAdapter.getItem(position);
+        Intent intent = StaffDetailActivity.newIntent(getContext(), staff);
+        Pair name = Pair.create(holder.name, getString(R.string.share_name));
+        Pair mobile = Pair.create(holder.mobile, getString(R.string.share_mobile));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                getActivity(), name, mobile);
+        ActivityCompat.startActivity(getContext(), intent, options.toBundle());
     }
 
     private void deleteStaff(int position) {

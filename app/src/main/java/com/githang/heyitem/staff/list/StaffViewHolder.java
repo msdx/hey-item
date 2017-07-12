@@ -21,9 +21,18 @@ class StaffViewHolder extends RecyclerView.ViewHolder {
         mobile = itemView.findViewById(R.id.mobile);
         SwipeMenuLayout layout = itemView.findViewById(R.id.swipe_menu);
         layout.setIos(false);
+        layout.setLeftSwipe(false);
     }
 
-    public void setOnDeleteListener(View.OnClickListener listener) {
+    void setDeleteListener(View.OnClickListener listener) {
         itemView.findViewById(R.id.delete).setOnClickListener(listener);
+    }
+
+    void setEditListener(View.OnClickListener listener) {
+        itemView.findViewById(R.id.edit).setOnClickListener(listener);
+    }
+
+    void setItemClickListener(View.OnClickListener listener) {
+        itemView.findViewById(R.id.item_view).setOnClickListener(listener);
     }
 }

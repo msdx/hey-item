@@ -10,7 +10,11 @@
     <string name="add">添加</string>
     <string name="save">保存</string>
     <string name="error_input_name">请输入姓名</string>
+    <string name="error_input_mobile">请输入手机</string>
     <string name="msg_save_successful">保存成功</string>
     <string name="msg_delete_successful">删除成功</string>
     <string name="error_staff_exists">该人员已存在</string>
+    <string name="staff_detail">人员详情</string>
+    <string name="id">编号</string>
+    <string name="create_time">创建时间</string>
 </resources>

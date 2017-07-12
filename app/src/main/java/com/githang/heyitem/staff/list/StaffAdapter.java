@@ -2,7 +2,6 @@ package com.githang.heyitem.staff.list;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
     @NonNull
     private List<Staff> mList;
     private LayoutInflater mLayoutInflater;
-    private OnDeleteListener mOnDeleteListener;
+    private ItemMenuListener mItemMenuListener;
 
     StaffAdapter(@NonNull List<Staff> list, LayoutInflater inflater) {
         mList = list;
@@ -31,12 +30,30 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
     @Override
     public StaffViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final StaffViewHolder holder = new StaffViewHolder(mLayoutInflater.inflate(R.layout.item_staff, parent, false));
-        holder.setOnDeleteListener(new View.OnClickListener() {
+        holder.setItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mOnDeleteListener != null) {
+                if (mItemMenuListener != null) {
                     int position = holder.getAdapterPosition();
-                    mOnDeleteListener.onDelete(position);
+                    mItemMenuListener.onItemClick(position, holder);
+                }
+            }
+        });
+        holder.setDeleteListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mItemMenuListener != null) {
+                    int position = holder.getAdapterPosition();
+                    mItemMenuListener.onDelete(position);
+                }
+            }
+        });
+        holder.setEditListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mItemMenuListener != null) {
+                    int position = holder.getAdapterPosition();
+                    mItemMenuListener.onEdit(position);
                 }
             }
         });
@@ -48,11 +65,6 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
         Staff staff = mList.get(position);
         holder.name.setText(staff.name);
         holder.mobile.setText(staff.mobile);
-        if (TextUtils.isEmpty(staff.mobile)) {
-            holder.mobile.setVisibility(View.GONE);
-        } else {
-            holder.mobile.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
@@ -60,8 +72,8 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
         return mList.size();
     }
 
-    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
-        mOnDeleteListener = onDeleteListener;
+    public void setItemMenuListener(ItemMenuListener itemMenuListener) {
+        mItemMenuListener = itemMenuListener;
     }
 
     void update(List<Staff> list) {
@@ -83,7 +95,11 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
         notifyItemRemoved(position);
     }
 
-    public interface OnDeleteListener {
+    public interface ItemMenuListener {
+        void onItemClick(int position, StaffViewHolder holder);
+
+        void onEdit(int position);
+
         void onDelete(int position);
     }
 }
