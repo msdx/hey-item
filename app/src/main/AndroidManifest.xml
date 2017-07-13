@@ -26,6 +26,8 @@
             android:name=".staff.detail.StaffDetailActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".staff.edit.EditStaffActivity">
+        </activity>
     </application>
 
 </manifest>

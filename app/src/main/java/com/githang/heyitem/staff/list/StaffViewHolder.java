@@ -14,14 +14,15 @@ import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 class StaffViewHolder extends RecyclerView.ViewHolder {
     final TextView name;
     final TextView mobile;
+    final SwipeMenuLayout swipeMenu;
 
     StaffViewHolder(View itemView) {
         super(itemView);
         name = itemView.findViewById(R.id.name);
         mobile = itemView.findViewById(R.id.mobile);
-        SwipeMenuLayout layout = itemView.findViewById(R.id.swipe_menu);
-        layout.setIos(false);
-        layout.setLeftSwipe(false);
+        swipeMenu = itemView.findViewById(R.id.swipe_menu);
+        swipeMenu.setIos(false);
+        swipeMenu.setLeftSwipe(false);
     }
 
     void setDeleteListener(View.OnClickListener listener) {

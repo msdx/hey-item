@@ -1,7 +1,5 @@
 package com.githang.heyitem.staff.detail;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -30,11 +28,5 @@ public class StaffDetailActivity extends BaseActivity {
         name.setText(staff.name);
         mobile.setText(staff.mobile);
         createTime.setText(Formats.formatTime(staff.createTime));
-    }
-
-    public static Intent newIntent(Context context, Staff staff) {
-        Intent intent = new Intent(context, StaffDetailActivity.class);
-        AutoExtra.put(intent, staff);
-        return intent;
     }
 }

@@ -46,6 +46,7 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
                     int position = holder.getAdapterPosition();
                     mItemMenuListener.onDelete(position);
                 }
+                holder.swipeMenu.smoothClose();
             }
         });
         holder.setEditListener(new View.OnClickListener() {
@@ -55,6 +56,7 @@ class StaffAdapter extends RecyclerView.Adapter<StaffViewHolder> {
                     int position = holder.getAdapterPosition();
                     mItemMenuListener.onEdit(position);
                 }
+                holder.swipeMenu.smoothClose();
             }
         });
         return holder;

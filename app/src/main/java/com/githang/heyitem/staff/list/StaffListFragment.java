@@ -22,6 +22,8 @@ import com.githang.heyitem.R;
 import com.githang.heyitem.staff.Staff;
 import com.githang.heyitem.staff.add.AddStaffActivity;
 import com.githang.heyitem.staff.detail.StaffDetailActivity;
+import com.githang.heyitem.staff.edit.EditStaffActivity;
+import com.githang.heyitem.support.AutoExtra;
 import com.githang.heyitem.support.SpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.List;
  */
 public class StaffListFragment extends Fragment {
     private static final int REQUEST_ADD_STAFF = 1000;
+    private static final int REQUEST_EDIT_STAFF = 1001;
 
     private RecyclerView mRecyclerView;
     private StaffAdapter mAdapter;
@@ -77,7 +80,7 @@ public class StaffListFragment extends Fragment {
 
             @Override
             public void onEdit(int position) {
-                // TODO: 17-7-12 Edit staff
+                editStaff(position);
             }
 
             @Override
@@ -96,7 +99,7 @@ public class StaffListFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_ADD_STAFF) {
+        if (requestCode == REQUEST_ADD_STAFF || requestCode == REQUEST_EDIT_STAFF) {
             if (resultCode == Activity.RESULT_OK) {
                 Snackbar.make(getView(), R.string.msg_save_successful, Snackbar.LENGTH_SHORT).show();
                 reloadStaffList();
@@ -113,12 +116,20 @@ public class StaffListFragment extends Fragment {
 
     private void showStaffDetail(int position, final StaffViewHolder holder) {
         Staff staff = mAdapter.getItem(position);
-        Intent intent = StaffDetailActivity.newIntent(getContext(), staff);
+        Intent intent = new Intent(getActivity(), StaffDetailActivity.class);
+        AutoExtra.put(intent, staff);
         Pair name = Pair.create(holder.name, getString(R.string.share_name));
         Pair mobile = Pair.create(holder.mobile, getString(R.string.share_mobile));
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 getActivity(), name, mobile);
-        ActivityCompat.startActivity(getContext(), intent, options.toBundle());
+        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+    }
+
+    private void editStaff(int position) {
+        Staff staff = mAdapter.getItem(position);
+        Intent intent = new Intent(getActivity(), EditStaffActivity.class);
+        AutoExtra.put(intent, staff);
+        startActivityForResult(intent, REQUEST_EDIT_STAFF);
     }
 
     private void deleteStaff(int position) {

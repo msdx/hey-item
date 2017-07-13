@@ -6,6 +6,7 @@
     <string name="records">记录</string>
     <string name="name">姓名</string>
     <string name="mobile">手机</string>
+    <string name="mobile_number">手机号码</string>
     <string name="add_staff">添加人员</string>
     <string name="add">添加</string>
     <string name="save">保存</string>
@@ -17,4 +18,5 @@
     <string name="staff_detail">人员详情</string>
     <string name="id">编号</string>
     <string name="create_time">创建时间</string>
+    <string name="edit_staff">编辑人员</string>
 </resources>
