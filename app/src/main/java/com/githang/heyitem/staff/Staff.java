@@ -22,7 +22,7 @@ public class Staff implements Parcelable {
     @PrimaryKey(AssignType.AUTO_INCREMENT)
     @Column("_id")
     public long id;
-    @Column("name")
+    @Column(COL_NAME)
     @NotNull
     public String name;
     @Column("mobile")
